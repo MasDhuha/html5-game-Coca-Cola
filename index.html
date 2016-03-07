@@ -1,0 +1,353 @@
+<?php
+require_once "jssdk.php";
+    if(!$_GET["nickname"]){
+    header('Location: http://XXX/auth/auth.ashx');
+    exit;
+    }
+
+    if($_GET["openid"]=='oykuoxxxxxx'){
+    header('Location: http://XXX/auth/auth.ashx');
+    exit;
+    }
+    
+
+
+$jssdk = new JSSDK("wx81eda02xxx", "xxxxxxxxxx");
+$signPackage = $jssdk->GetSignPackage();
+
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="animate.css">
+    <title>可口可乐邀您当个发烧友！</title>
+    <script type="text/javascript" charset="utf-8" src="jquery.min.js"></script>
+    <script src="js.js"></script>
+
+</head>
+<body ontouchmove="event.preventDefault()">
+<div class="main cf"  ontouchmove="event.preventDefault()" >
+
+    <div id="music" onclick="musicCtl()" class="music musicbg" >
+        <img id="musicimg" src="images/music_off.png" class="runrunrun">
+    </div>
+
+
+    <div id="p01bg" class="ondisplaypage">
+        <img src="images/p1_01.png" id="p0101" class="animated bounceIn">
+    </div>
+
+    <div id="p02bg"  class="displaypage  "  >
+        <div id="p02guanghuan" class="displaypage  ">
+            <img src="images/p2_guanghuan.png">
+        </div>
+        <div id="p02jgz" >
+            <img ID="p02jgzimg" src="images/p2_1.png">
+        </div>
+        <div id="p02move" class="dragme">
+            <img id="p02moveimg" src="images/p2_4.png">
+        </div>
+        <div id="p02jgz2" style="display: none" >
+            <img src="images/p2_4.png">
+        </div>
+
+
+
+
+    </div>
+
+    <div id="p03bg"  class="displaypage" >
+        <div id="p0301" class="displaypage">
+            <img src="images/p3_1.png" >
+        </div>
+        <div id="p0302" class="displaypage">
+            <img src="images/p3_2.png" >
+        </div>
+
+    </div>
+
+    <div id="p04bg"    class="displaypage">
+        <div id="p0401"  class="displaypage">
+            <img id="p401img" src="images/p4_2.png" >
+        </div>
+
+    </div>
+
+    <div id="p05bg"   class="displaypage" >
+        <div id="p0501" class="displaypage" >
+            <img src="images/p5_2.png" >
+        </div>
+        <div id="p0502" class="displaypage" >
+            <img src="images/p5_1.png"  >
+        </div>
+
+    </div>
+    <div id="p06bg"     class="displaypage"  >
+        <div id="p0601" >
+            <img id="p0601img" src="images/p6_1.png"     class="displaypage"   >
+        </div>
+
+
+    </div>
+    <div id="p07bg"  class="displaypage" >
+        <div id="p0701" class="displaypage" >
+            <img src="images/p7_2.png" >
+        </div>
+        <div id="p0702" class="displaypage" >
+            <img src="images/p7_1.png"  >
+        </div>
+
+    </div>
+    <div id="p08bg"   class="displaypage"  >
+        <div id="p08guo" >
+            <img id="p8tg" src="images/p8_guo.png">
+
+        </div>
+        <div id="p08big">
+            <img src="images/p8_big.png">
+        </div>
+        <div id="p08small"  class="displaypage">
+            <img src="images/p8_small.png">
+        </div>
+        <div id="p08tx" class="displaypage">
+            <img src="images/p8_tx.png">
+        </div>
+
+
+    </div>
+    <div id="p09bg"   class="displaypage" >
+        <div id="p0901"  class="displaypage"  >
+            <img src="images/p9_1.png" >
+        </div>
+        <div id="p0902" class="displaypage" >
+            <img src="images/p9_2.png"  >
+        </div>
+
+    </div>
+    <div id="p10bg"   class="displaypage">
+        <div id="p1001"    >
+            <img src="images/p10_2.png" >
+        </div>
+        <div id="p1002"  >
+            <img src="images/p10_1.png"  >
+        </div>
+
+    </div>
+    <div id="p11bg"      class="displaypage"  >
+        <div id="p1101" class="displaypage" >
+            <img id="p1101img"  src="images/p11_2.png" >
+        </div>
+        <div id="p1102"class="displaypage"  >
+            <img src="images/p11_1.png"  >
+        </div>
+
+    </div>
+    <div id="paddbg" class="displaypage">
+        <img src="images/p_add.png" id="add01" class="animated bounceIn">
+    </div>
+
+
+    <div id="p12bg"     class="displaypage"  >
+        <!--<div id="p1201" class="displaypage"  >-->
+            <!--<img src="images/p12_2.png"  >-->
+        <!--</div>-->
+        <div id="p1202" class="displaypage" >
+            <img src="images/p12_1.png"  class="animated bounceIn" >
+        </div>
+
+    </div>
+    <audio   autoplay="autoplay"  id="audioplay">
+        <source src="mp3.mp3" type="audio/mpeg" />
+    </audio>
+    <script>
+
+ 
+        musicStatus = true;
+        $(".main").css("height",pageHeight);
+        $(".main").css("width",pageWidth);
+
+        $("#p01bg").click(function(){
+            addClass("#p02bg");
+            rmClass("#p01bg");
+
+
+        })
+ 
+        $("#p0301").click(function(){
+            //alert('hello');
+            rmClass("#p0301");
+            addClass('#p0302');
+
+        })
+
+        function coverPage3(){
+ 
+            setTimeout('rmClass("#p0301"),addClass("#p0302"),coverPage31()',2000);
+
+        }
+        function coverPage31(){
+ 
+            setTimeout('rmClass("#p0302"),rmClass("#p03bg"),addClass("#p04bg"),addClass("#p0401")',2000);
+
+        }
+
+        function coverPage5(){
+
+            setTimeout('addClass("#p0502"),rmClass("#p0501"),coverPage51()',2000);
+
+        }
+ 
+
+        function coverPage51(){
+
+            setTimeout('addClass("#p06bg"),rmClass("#p05bg")',2000);
+
+        }
+
+
+ 
+
+
+        $("#p0601").click(function(){
+  
+            addClass('#p0601img');
+            setTimeout("addClass('#p07bg'),addClass('#p0701'), rmClass('#p06bg'),coverPage7()",600);
+            //setTimeout("addClass('#p07bg'), rmClass('#p07bg')",500);
+        })
+
+        function coverPage7(){
+            setTimeout("addClass('#p0702'),rmClass('#p0701'),coverPage8()",2000);
+        }
+        function coverPage8(){
+            setTimeout("addClass('#p08bg'),rmClass('#p07bg')",2000);
+        }
+        //    $("#p0701").click(function(){
+        //        //alert('hello');
+        //
+        //
+        //        setTimeout("addClass('#p0702'),rmClass('#p0701')",2000);
+        //
+        //        //setTimeout("addClass('#p07bg'), rmClass('#p07bg')",500);
+        //    })
+        //    $("#p0702").click(function(){
+        //        addClass('#p08bg');
+        //        rmClass('#p07bg')
+        //    })
+
+        //    $("#p08bg").click(function(){
+        //        addClass('#p09bg');
+        //        addClass('#p0901');
+        //        rmClass('#p08bg');
+        //    })
+
+        function coverPage9(){
+            setTimeout("addClass('#p10bg'),rmClass('#p09bg')",2000);
+        }
+        function coverPage91(){
+            setTimeout("addClass('#p0902'),rmClass('#p0901'),coverPage9()",2000);
+
+        }
+        //    $("#p0902").click(function(){
+        //        addClass('#p0901');
+        //        rmClass('#p0902');
+        //        //rmClass('#p08bg');
+        //    })
+        //    $("#p0901").click(function(){
+        //        addClass('#p10bg');
+        //        //addClass('#1001');
+        //        rmClass('#p09bg');
+        //        //rmClass('#p08bg');
+        //    })
+
+        function coverPage11(){
+            setTimeout(" addClass('#p1102'),rmClass('#p1101'),coverPageAdd()",1000)
+
+        }
+
+        //paddbg
+        function coverPageAdd(){
+
+            setTimeout(" addClass('#paddbg'),rmClass('#p11bg'),coverPage8000()",2000)
+        }
+
+        function coverPage8000(){
+
+            setTimeout("coverPage12()",7500)
+        }
+        function coverPage12(){
+            setTimeout(" addClass('#p12bg'), addClass('#p1202'),rmClass('#paddbg')",2000)
+
+        }
+
+
+
+        function coverPage13(){
+            setTimeout(" addClass('#p1201'),rmClass('#p1202')",2000)
+
+        }
+       
+
+        function musicCtl(r){
+            var vid = document.getElementById("audioplay");
+            if (musicStatus){
+                vid.pause();
+                musicStatus= false;
+                $("#musicimg").removeClass("runrunrun");
+                //musicbg
+                $("#music").removeClass("musicbg");
+
+            }else{
+                vid.play();
+                musicStatus= true;
+                $("#musicimg").addClass("runrunrun");
+                $("#music").addClass("musicbg");
+            }
+
+
+        }
+
+
+    </script>
+</div>
+</body>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+    // 注意：所有的JS接口只能在公众号绑定的域名下调用，公众号开发者需要先登录微信公众平台进入“公众号设置”的“功能设置”里填写“JS接口安全域名”。
+
+    wx.config({
+        appId: '<?php echo $signPackage["appId"];?>',
+        timestamp: <?php echo $signPackage["timestamp"];?>,
+    nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+            signature: '<?php echo $signPackage["signature"];?>',
+            jsApiList: [
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage',
+        'onMenuShareQQ',
+        'onMenuShareWeibo',
+        'hideMenuItems',
+        'showMenuItems',
+        'hideAllNonBaseMenuItem',
+        'showAllNonBaseMenuItem'
+    ]
+    });
+    wx.ready(function () {
+
+        var shareData = {
+            title: '<?php echo $_GET["nickname"];?>邀您当个发烧友！',
+            desc: '这个夏天，可口可乐让分享更有戏！',
+            link: 'http://xxx',
+            imgUrl: 'http://xxx'
+        };
+        wx.onMenuShareAppMessage(shareData);
+        wx.onMenuShareTimeline(shareData);
+ 
+    });
+</script>
+</html>
